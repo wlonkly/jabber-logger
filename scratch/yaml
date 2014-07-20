@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby1.9
+require 'yaml'
+
+y = YAML.load_file("../config-example.yml")
+
+y['logfiles'].keys.each do |file|
+    puts file
+    puts y['logfiles'][file]['exclude']
+end
+
+# puts y.inspect
