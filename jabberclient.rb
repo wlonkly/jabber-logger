@@ -3,6 +3,7 @@
 # set up global jabber connection
 #
 
+# TODO: debug config flag
 Jabber::debug = true
 cl = Jabber::Client.new(Jabber::JID.new($jid))
 cl.connect
