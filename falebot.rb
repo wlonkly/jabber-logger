@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
+require "rubygems"
 require 'xmpp4r'
 require 'xmpp4r/muc/helper/simplemucclient'
+require "filewatch/tail"
 
 # jabber server credentials
 $jid  = 'test3@jabber.freshbooks.com'
@@ -17,4 +19,4 @@ def debug (message)
 end
 
 require './jabberclient.rb'
-#require 'logtail.rb'
+require 'logtail.rb'
