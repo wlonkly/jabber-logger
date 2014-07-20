@@ -1,10 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    filewatch (0.5.1)
     xmpp4r (0.5.6)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  filewatch
   xmpp4r
