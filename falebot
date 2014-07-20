@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
-require "rubygems"
+require 'rubygems'
+
 require 'xmpp4r'
 require 'xmpp4r/muc/helper/simplemucclient'
-require "filewatch/tail"
+require 'filewatch/tail'
 require 'yaml'
 
 # TODO: these go in lib/? how does one package a "program" with its supporting
