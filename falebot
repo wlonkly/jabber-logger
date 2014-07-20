@@ -7,17 +7,9 @@ require 'yaml'
 
 # TODO: these go in lib/? how does one package a "program" with its supporting
 # files in Ruby anyhow?
-require './jabberclient.rb'
-require './logtail.rb'
+require './lib/jabberclient.rb'
+require './lib/logtail.rb'
 
-# TODO: separate yaml(?) config
-config = YAML.load_file("./config.yml")
-
-muc = jabber_connect(config)
-tail_logs(config, muc)
-
-# def debug (message)
-#   time = Time.now.strftime("%H:%M:%S")
-#  puts "[" + time + "] " + message
-# end
-
+$config = YAML.load_file("./config.yml")
+$muc = connect_jabber_muc()
+tail_logs_forever()
