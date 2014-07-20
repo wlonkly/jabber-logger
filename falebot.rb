@@ -4,6 +4,8 @@ require 'xmpp4r'
 require 'xmpp4r/muc/helper/simplemucclient'
 require "filewatch/tail"
 
+# TODO: separate yaml(?) config
+
 # jabber server credentials
 $jid  = 'test3@jabber.freshbooks.com'
 $pass = 'testing'
@@ -18,5 +20,7 @@ def debug (message)
   puts "[" + time + "] " + message
 end
 
+# TODO: these go in lib/? how does one package a "program" with its supporting
+# files in Ruby anyhow?
 require './jabberclient.rb'
-require 'logtail.rb'
+require './logtail.rb'
