@@ -1,4 +1,4 @@
 falebot-ruby
 ============
 
-A non-Hubot, Ruby version of falebot, which will hopefully allow more native filtering
+A standalone version of the Hubot fale-bot.  To use, copy "config-example.yml" to "config.yml" and run.
