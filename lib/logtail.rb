@@ -10,13 +10,12 @@ def process_line (path, line)
             return nil
         end
     end
-
-    filters = c['filter'] || []
+    
+    filters =  c['filter'] || []     
     filters.each do |filter|
         line.gsub!(Regexp.new(filter['replace']), filter['with'])
     end
-
-    return line
+    line
 end
 
 def tail_logs_forever 
