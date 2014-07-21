@@ -3,16 +3,16 @@
 def process_line (path, line)
     c = $config['logfiles'][path]
 
-    exclude = c['exclude'] || []
-    c['exclude'].each do |exclude|
+    excludes = c['exclude'] || []
+    excludes.each do |exclude|
         # TODO: precompile regexps on startup
         if Regexp.new(exclude).match(line)
             return nil
         end
     end
 
-    filter = c['filter'] || []
-    c['filter'].each do |filter|
+    filters = c['filter'] || []
+    filters.each do |filter|
         line.gsub!(Regexp.new(filter['replace']), filter['with'])
     end
 
