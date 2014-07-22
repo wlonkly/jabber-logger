@@ -5,12 +5,19 @@ require 'xmpp4r'
 require 'xmpp4r/muc/helper/simplemucclient'
 require 'filewatch/tail'
 require 'yaml'
+require 'logger'
 
 # TODO: these go in lib/? how does one package a "program" with its supporting
 # files in Ruby anyhow?
 require './lib/jabberclient.rb'
 require './lib/logtail.rb'
 
+
 $config = YAML.load_file("./config.yml")
+
+$logger = Logger.new(STDERR)
+$logger.progname = $0
+$logger.level = $config['debug'] ? Logger::DEBUG : Logger::INFO
+
 $muc = connect_jabber_muc()
 tail_logs_forever()
