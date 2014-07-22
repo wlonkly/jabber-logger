@@ -9,7 +9,7 @@ def process_line (path, line)
   excludes.each do |exclude|
     # TODO: precompile regexps on startup
     if Regexp.new(exclude).match(line)
-      logger.debug "Line matches /#{exclude}/, excluding"
+      $logger.debug "Line matches /#{exclude}/, excluding"
       return nil
     end
   end
