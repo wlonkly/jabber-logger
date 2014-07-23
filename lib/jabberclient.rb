@@ -6,7 +6,7 @@ def jabber_connect
   $logger.info "Connecting to Jabber..."
   Jabber::debug = $config['jabber']['debug'] || false
   client = Jabber::Client.new(Jabber::JID.new($config['jabber']['jid']))
-  client.connect
+  client.connect($config['jabber']['server'])
   client.auth($config['jabber']['password'])
   client
 end

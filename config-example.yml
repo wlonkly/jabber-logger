@@ -1,0 +1,29 @@
+debug: false
+
+jabber: 
+  jid: user@jabber.example.com
+  server: jabber.example.com
+  password: password
+  muc_nick: nick
+
+logfiles: 
+  /tmp/logfile:
+    room: falebot2@conference.jabber.example.com
+    filter:
+      - replace: thing
+        with: other thing
+      - replace: thing2
+        with: other thing 2
+    exclude:
+      - one exclude
+      - another exclude
+
+  /tmp/logfile2:
+    room: falebot3@conference.jabber.example.com
+    filter:
+      - replace: this
+        with: that
+    exclude:
+      - this
+      - that
+      - another
