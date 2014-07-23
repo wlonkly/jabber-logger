@@ -1,18 +1,19 @@
-
 #
 # set up global jabber connection
 #
 
-def connect_jabber_muc
+def jabber_connect
   $logger.info "Connecting to Jabber..."
   Jabber::debug = $config['jabber']['debug'] || false
-  cl = Jabber::Client.new(Jabber::JID.new($config['jabber']['jid']))
-  cl.connect
-  cl.auth($config['jabber']['password'])
+  client = Jabber::Client.new(Jabber::JID.new($config['jabber']['jid']))
+  client.connect
+  client.auth($config['jabber']['password'])
+  client
+end
 
-  m = Jabber::MUC::SimpleMUCClient.new(cl)
-  m.join($config['jabber']['muc_room'] + "/" + $config['jabber']['muc_nick'], 
-      $config['jabber']['muc_password'])
-  $logger.info "Connected."
-  return m
+def jabber_join_muc (client, room)
+  muc = Jabber::MUC::SimpleMUCClient.new(client)
+  muc.join(room  + "/" + $config['jabber']['muc_nick'])
+  $logger.info "Joined #{room}"
+  muc
 end

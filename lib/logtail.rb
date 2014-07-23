@@ -28,16 +28,28 @@ def tail_logs_forever
   # i'm not sure if i've missed mysterious implications of this but it APPEARS that
   # it's kept in memory and just cached to the sincedb file at intervals.
   t = FileWatch::Tail.new(:stat_interval => 1, :sincedb_path => '/dev/null')
+  
+  j = jabber_connect()
+  muc = Hash.new
 
   $config['logfiles'].keys.each do |path|
-    $logger.info "Started watching #{path}"
-    t.tail(path)
-  end 
+    # only join each jabber MUC once, even if multiple files log to that MUC
+    room = $config['logfiles'][path]['room']
+    unless muc[room]
+      $logger.info "Joining #{room} for #{path}"
+      muc[room] = jabber_join_muc(j, room)
+    end
 
+    $logger.info "Watching #{path}"
+    t.tail(path)
+  end
+
+  # watch endlessly
   t.subscribe do |path, line|
     l = process_line(path, line)
     if l 
-      $muc.say(l)
+      room = $config['logfiles'][path]['room']
+      muc[room].say(l)
     end
   end
 end 

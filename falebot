@@ -6,18 +6,30 @@ require 'xmpp4r/muc/helper/simplemucclient'
 require 'filewatch/tail'
 require 'yaml'
 require 'logger'
+require 'optparse'
 
-# TODO: these go in lib/? how does one package a "program" with its supporting
-# files in Ruby anyhow?
 require './lib/jabberclient.rb'
 require './lib/logtail.rb'
 
+options = {:config => "./config.yml"}
 
-$config = YAML.load_file("./config.yml")
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{$0} [options]"
+  opts.on('-c', '--config file.yml', 'Config file') do |config|
+    options[:config] = config;
+  end
+  opts.on('-h', '--help', 'Help') do
+    puts opts
+    exit
+  end
+end
+
+parser.parse!
+
+$config = YAML.load_file(options[:config])
 
 $logger = Logger.new(STDERR)
 $logger.progname = $0
 $logger.level = $config['debug'] ? Logger::DEBUG : Logger::INFO
 
-$muc = connect_jabber_muc()
 tail_logs_forever()
